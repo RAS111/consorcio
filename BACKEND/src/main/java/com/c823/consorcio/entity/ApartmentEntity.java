@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class ApartmentEntity {
+public class ApartmentEntity {//informe
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

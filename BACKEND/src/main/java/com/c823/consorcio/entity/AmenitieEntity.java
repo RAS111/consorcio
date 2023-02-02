@@ -11,8 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-
-public class AmenitieEntity {
+public class AmenitieEntity {//comodidades
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
