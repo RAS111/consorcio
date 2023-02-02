@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @Entity
 @Table(name = "AMENITIES_RESERVATIONS")
-public class ReservationEntity {
+public class ReservationEntity {//Reserva
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

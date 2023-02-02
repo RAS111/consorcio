@@ -3,7 +3,10 @@ package com.c823.consorcio.entity;
 import com.c823.consorcio.enums.RoleName;
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +14,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ROLES")
 public class RoleEntity {
 
@@ -25,4 +30,6 @@ public class RoleEntity {
 
     @OneToMany(mappedBy = "role",fetch = FetchType.EAGER) //TODO: "ver cascade"
     private List<UserEntity> users = new ArrayList<>();
+
+
 }

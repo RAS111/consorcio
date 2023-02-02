@@ -64,9 +64,6 @@ public class UserEntity implements Serializable {
     private List<MessageEntity> messages = new ArrayList<>();
 
 
-
-
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleEntity role;

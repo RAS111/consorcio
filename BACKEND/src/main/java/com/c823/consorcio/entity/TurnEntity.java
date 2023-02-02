@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TURNS")
-public class TurnEntity {
+public class TurnEntity { // Giro o turnos
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
