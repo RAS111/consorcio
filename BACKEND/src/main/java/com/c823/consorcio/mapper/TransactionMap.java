@@ -1,9 +1,7 @@
 package com.c823.consorcio.mapper;
 
-import com.c823.consorcio.dto.AccountBasicDto;
 import com.c823.consorcio.dto.TransactionBasicDto;
 import com.c823.consorcio.dto.TransactionDto;
-import com.c823.consorcio.entity.AccountEntity;
 import com.c823.consorcio.entity.TransactionEntity;
 import com.c823.consorcio.entity.UserEntity;
 import com.c823.consorcio.repository.ITransactionRepository;
@@ -66,7 +64,8 @@ public class TransactionMap {
     dto.setTransactionDate(transactionDetail.getTransactionDate());
     dto.setDescription(transactionDetail.getDescription());
     dto.setAccountId(transactionDetail.getAccountId().getAccountId());
-    //dto.setDestinationAccountId(iTransactionRepository.findByAccountId(user));//TODO: VISUALIZAR CUENTA DESTINO
+    //dto.setDestinationAccountId(iTransactionRepository.findByAccountId(user));
+    // TODO: VISUALIZAR CUENTA DESTINO
 
     return dto;
   }
