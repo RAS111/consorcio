@@ -37,11 +37,13 @@ public class AccountEntity {//Cuenta
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+   //@OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "accountId")
     private List<TransactionEntity> transactions = new ArrayList<>();
 
 
-    @OneToOne(fetch = FetchType.EAGER)
+    //@OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "apartment_id")
     private ApartmentEntity apartment;
 

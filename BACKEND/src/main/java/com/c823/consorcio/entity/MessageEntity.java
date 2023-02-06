@@ -14,7 +14,8 @@ import org.hibernate.annotations.CreationTimestamp;
 public class MessageEntity {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    //@GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String subject;
     private String detail;

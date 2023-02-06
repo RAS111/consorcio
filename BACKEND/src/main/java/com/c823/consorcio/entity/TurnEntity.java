@@ -19,7 +19,8 @@ import javax.persistence.Table;
 public class TurnEntity { // Giro o turnos
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "TURN_ID", nullable = false,unique = true)
   private Long turnId;
 

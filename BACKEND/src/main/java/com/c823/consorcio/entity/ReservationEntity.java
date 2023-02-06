@@ -30,7 +30,8 @@ public class ReservationEntity {//Reserva
     @Column(name = "TURN_ID")
     private Turn turn;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "USER_ID")
     private UserEntity userEntity;
 
