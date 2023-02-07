@@ -3,15 +3,21 @@ package com.c823.consorcio.controllerTest.auth;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
+import com.c823.consorcio.auth.dto.AuthenticationRequest;
+import com.c823.consorcio.auth.dto.AuthenticationResponse;
 import com.c823.consorcio.auth.dto.ResponseUserDto;
+import com.c823.consorcio.auth.service.JwtUtils;
 import com.c823.consorcio.auth.service.UserDetailsCustomService;
 
+import com.c823.consorcio.enums.RoleName;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +27,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.sql.Date;
+import java.util.Objects;
 
 
 @SpringBootTest
@@ -38,9 +51,20 @@ class UserAuthControllerTest {
     private ObjectMapper objectMapper;
 
 
+
     @BeforeEach
     void init() {
-
+        /*
+        ResponseUserDto userDto = new ResponseUserDto();
+        userDto.setFirstName("Abel");
+        userDto.setLastName("Acevedo");
+        userDto.setEmail("abel@gmail.com");
+        userDto.setFloor("1°B Flia Acevedo");
+        userDto.setPassword("12345678");
+        userDto.setRole(RoleName.USER);
+        userDto.setApartmentNumber(25L);
+        userDto.setCreationDate(new Date(100000));
+*/
     }
 
     @Test
@@ -60,6 +84,28 @@ class UserAuthControllerTest {
                 Assertions.assertEquals(90L,userDto.getApartmentNumber());
 
 
+    }
+
+    @Test
+    public void singIndTest() throws Exception {
+        AuthenticationRequest request = createAuthenticationRequest();
+        AuthenticationResponse response = new AuthenticationResponse();
+
+        when(userDetailsServices.signIn(any(AuthenticationRequest.class))).thenReturn(response);
+        this.mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.jwt", is(response.getJwt())));
+
+
+    }
+
+    private AuthenticationRequest createAuthenticationRequest() {
+        AuthenticationRequest request = new AuthenticationRequest();
+        request.setEmail("abel@gmail.com");
+        request.setPassword("12345678");
+        return request;
     }
 
 

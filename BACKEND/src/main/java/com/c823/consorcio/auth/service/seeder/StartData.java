@@ -24,9 +24,10 @@ public class StartData {
     public void seed(ContextRefreshedEvent event){
         List<RoleEntity> roles = roleRepository.findAll();
         List<TurnEntity> turns = turnRepository.findAll();
-        if(roles.isEmpty()|| turns.isEmpty())
+        if(roles.isEmpty() || turns.isEmpty()) {
             this.createRoles();
             this.createTurns();
+        }
 
     }
 
