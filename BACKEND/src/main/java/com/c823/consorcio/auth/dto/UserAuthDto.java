@@ -3,7 +3,10 @@ package com.c823.consorcio.auth.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import lombok.Builder;
 import lombok.Data;
+
 
 @Data
 public class UserAuthDto {

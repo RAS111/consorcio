@@ -1,4 +1,6 @@
 package com.c823.consorcio.auth.service;
+import com.c823.consorcio.auth.dto.AuthenticationRequest;
+import com.c823.consorcio.auth.dto.AuthenticationResponse;
 import com.c823.consorcio.auth.dto.UserAuthDto;
 import com.c823.consorcio.entity.ApartmentEntity;
 import com.c823.consorcio.entity.RoleEntity;
@@ -16,6 +18,9 @@ import com.c823.consorcio.service.IAccountService;
 
 import com.c823.consorcio.service.IApartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,6 +45,12 @@ public class UserDetailsCustomService implements UserDetailsService {
   IApartmentService iapartmentService;
   @Autowired
   AccountMap accountMap;
+
+  @Autowired
+  private AuthenticationManager authenticationManager;
+
+  @Autowired
+  private JwtUtils jwtTokenUtils;
 
 
 
@@ -80,4 +91,29 @@ public class UserDetailsCustomService implements UserDetailsService {
 
   public void saveAdmin(UserAuthDto user) {
   }
+
+    public AuthenticationResponse signIn(AuthenticationRequest authenticationRequest) {
+
+      UserDetails userDetails;
+      Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+              authenticationRequest.getEmail(), authenticationRequest.getPassword()));
+      userDetails = (UserDetails) authentication.getPrincipal();
+      final String jwt = jwtTokenUtils.generateToken(userDetails);
+      return new AuthenticationResponse(jwt);
+    }
+
+        /*
+    UserDetails userDetails;
+
+    Authentication auth = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
+            authenticationRequest.getPassword())
+    );
+    userDetails = (UserDetails) auth.getPrincipal();
+
+    final String jwt = jwtTokenUtils.generateToken(userDetails);
+    return ResponseEntity.ok(new AuthenticationResponse(jwt));
+  }
+
+ */
 }
