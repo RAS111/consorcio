@@ -1,9 +1,8 @@
-package com.c823.consorcio.controllerTest.auth;
+package com.c823.consorcio.controller.auth;
 
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -13,11 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.c823.consorcio.auth.dto.AuthenticationRequest;
 import com.c823.consorcio.auth.dto.AuthenticationResponse;
 import com.c823.consorcio.auth.dto.ResponseUserDto;
-import com.c823.consorcio.auth.service.JwtUtils;
 import com.c823.consorcio.auth.service.UserDetailsCustomService;
 
-import com.c823.consorcio.enums.RoleName;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,16 +23,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.sql.Date;
-import java.util.Objects;
 
 
 @SpringBootTest
