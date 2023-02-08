@@ -1,4 +1,4 @@
-package com.c823.consorcio.controllerTest;
+package com.c823.consorcio.controller;
 
 import com.c823.consorcio.auth.exception.ParamNotFound;
 import com.c823.consorcio.auth.exception.RepeatedUsername;
