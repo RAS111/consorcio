@@ -36,7 +36,7 @@ public class AccountMap {
     account.setBalance(entity.getBalance());
     account.setCreationDate(entity.getCreationDate());
     //account.setApartment(
-      //  (ApartmentEntity) apartmentMap.apartmentEntityList2DtoList(entity.getUser().getApartments()));
+    //    (ApartmentEntity) apartmentMap.apartmentEntityList2DtoList(entity.getUser().getApartments()));
 
    return account;
   }
