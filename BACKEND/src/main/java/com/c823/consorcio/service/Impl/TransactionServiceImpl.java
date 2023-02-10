@@ -158,6 +158,7 @@ public class TransactionServiceImpl implements ITransactionService {
     }
 
     TransactionDto transactionDto = transactionMap.transactionEntity2Dto(transactionDetail);
+
     return transactionDto;
   }
 }

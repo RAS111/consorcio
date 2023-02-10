@@ -64,8 +64,8 @@ public class TransactionMap {
     dto.setTransactionDate(transactionDetail.getTransactionDate());
     dto.setDescription(transactionDetail.getDescription());
     dto.setAccountId(transactionDetail.getAccountId().getAccountId());
-    //dto.setDestinationAccountId(iTransactionRepository.findByAccountId(user));
-    // TODO: VISUALIZAR CUENTA DESTINO
+    dto.setDestinationAccountId(dto.getDestinationAccountId());
+
 
     return dto;
   }
