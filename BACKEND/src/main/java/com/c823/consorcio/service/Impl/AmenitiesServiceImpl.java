@@ -6,7 +6,7 @@ import com.c823.consorcio.dto.ReservationDto;
 import com.c823.consorcio.entity.ReservationEntity;
 import com.c823.consorcio.entity.UserEntity;
 import com.c823.consorcio.mapper.AmenitiesMap;
-import com.c823.consorcio.repository.IAmenitieRepository;
+import com.c823.consorcio.repository.IReservationRepository;
 import com.c823.consorcio.repository.IUserRepository;
 import com.c823.consorcio.service.IAmenitiesService;
 import java.util.List;
@@ -20,7 +20,7 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
   @Autowired
   private AmenitiesMap amenitiesMap;
   @Autowired
-  private IAmenitieRepository iAmenitieRepository;
+  private IReservationRepository iReservationRepository;
   @Autowired
   private IUserRepository userRepository;
 
@@ -30,7 +30,7 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     UserEntity user = userRepository.findByEmail(email);
     Long userId= user.getUserId();
-    List<ReservationEntity> reservations = iAmenitieRepository.findAll();
+    List<ReservationEntity> reservations = iReservationRepository.findAll();
     ReservationEntity entity = amenitiesMap.amenitieDto2Entity(reservationDto,userId);
     reservations.forEach(reservation -> {
       if(reservations.stream().anyMatch(i -> reservationDto.getReservationDate().equals(i.getReservationDate()) )
@@ -38,7 +38,7 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
         throw new ParamNotFound("The day and turn already in use");
       }
     });
-    ReservationEntity entitySaved = iAmenitieRepository.save(entity);
+    ReservationEntity entitySaved = iReservationRepository.save(entity);
     ReservationDto result = amenitiesMap.amenitieEntity2Dto(entitySaved);
 
     return result;
@@ -47,12 +47,12 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
   @Override
   public List<ReservationBasicDto> getReservations() {
 
-    return amenitiesMap.amenitieEntityList2DtoList(iAmenitieRepository.findAll());
+    return amenitiesMap.amenitieEntityList2DtoList(iReservationRepository.findAll());
   }
 
   @Override
   public ReservationDto getDetailsById(Long reservationId) {
-    ReservationEntity reservation = iAmenitieRepository.findById(reservationId).orElseThrow(
+    ReservationEntity reservation = iReservationRepository.findById(reservationId).orElseThrow(
         ()-> new ParamNotFound("ID do not exist"));
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     UserEntity user = userRepository.findByEmail(email);
