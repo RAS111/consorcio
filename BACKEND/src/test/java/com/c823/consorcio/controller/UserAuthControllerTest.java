@@ -1,4 +1,4 @@
-package com.c823.consorcio.controller.auth;
+package com.c823.consorcio.controller;
 
 
 import static org.hamcrest.CoreMatchers.is;

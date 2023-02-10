@@ -38,10 +38,9 @@ public class ApartmentMap {
 
     List<ApartmentDto> apartmentDtos = new ArrayList<>();
 
-    ApartmentDto dto;
 
     for (ApartmentEntity apartment: apartments){
-      dto = new ApartmentDto();
+     ApartmentDto dto = new ApartmentDto();
       dto.setApartmentId(apartment.getApartmentId());
       dto.setApartmentNumber(apartment.getApartmentNumber());
       dto.setFloor(apartment.getFloor());
