@@ -18,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-*.properties
+#*.properties
 
 
 
@@ -36,5 +36,5 @@ build/
 .vscode/
 
 ## Application Properties ###
- .propierties
- *.properties
+ #.propierties
+ #*.properties
