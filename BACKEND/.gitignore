@@ -21,6 +21,7 @@ target/
 *.properties
 
 
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -35,4 +36,5 @@ build/
 .vscode/
 
 ## Application Properties ###
- propierties
+ .propierties
+ *.properties
