@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.c823.consorcio.controller.AccountControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.215 s - in com.c823.consorcio.controller.AccountControllerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.706 s - in com.c823.consorcio.controller.AccountControllerTest
