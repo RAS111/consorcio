@@ -5,6 +5,7 @@ import com.c823.consorcio.auth.service.AuthEntryPointJwt;
 import com.c823.consorcio.auth.service.UserDetailsCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,10 +25,11 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
+@Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
   @Autowired
   private UserDetailsCustomService userDetailsCustomService;
   @Autowired
@@ -39,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsCustomService);
+
   }
 
   @Bean
@@ -55,7 +58,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
 
+
   protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll();
+  }
+        /*.authorizeRequests().anyRequest().permitAll();
     httpSecurity.cors().and().csrf().disable()
         .authorizeRequests().antMatchers("/**","/auth/**"/*
             "/api/**",
@@ -64,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "http://127.0.0.1:5172/",
             "http://127.0.0.1:5173/",
             "http://127.0.0.1:5174/",
-            "http://127.0.0.1:5175/"*/
+            "http://127.0.0.1:5175/"
             ).permitAll()
         .antMatchers(HttpMethod.POST,"/**").permitAll()
         .antMatchers(HttpMethod.GET,"/**").permitAll()
@@ -74,8 +81,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-  }
-  @Bean
+  }*/
+  /*@Bean
   public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
@@ -98,7 +105,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .maxAge(3600);
       }
     };
-  }
+  }*/
 
 }
 
