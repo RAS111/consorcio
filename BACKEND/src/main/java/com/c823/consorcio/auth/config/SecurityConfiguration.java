@@ -5,6 +5,7 @@ import com.c823.consorcio.auth.service.AuthEntryPointJwt;
 import com.c823.consorcio.auth.service.UserDetailsCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,6 +21,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
@@ -62,6 +66,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "http://127.0.0.1:5174/",
             "http://127.0.0.1:5175/"*/
             ).permitAll()
+        .antMatchers(HttpMethod.POST,"/**").permitAll()
+        .antMatchers(HttpMethod.GET,"/**").permitAll()
         .anyRequest().authenticated()
         .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
         .and().sessionManagement()
@@ -77,9 +83,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     config.addAllowedOrigin("*");
     config.addAllowedHeader("*");
     config.addAllowedMethod("*");
-    
+
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter((CorsConfigurationSource) source);
+  }
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*")
+            .allowedMethods("GET", "POST", "PATCH", "PUT","DELETE")
+            .maxAge(3600);
+      }
+    };
   }
 
 }
