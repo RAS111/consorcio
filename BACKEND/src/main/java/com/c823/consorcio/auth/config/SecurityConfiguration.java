@@ -51,7 +51,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     httpSecurity.csrf().disable()
         .authorizeRequests().antMatchers("/auth/**",
             "/api/**",
-            "/v2/api-docs").permitAll()
+            "/v2/api-docs",
+            "http://127.0.0.1:5171/",
+            "http://127.0.0.1:5172/",
+            "http://127.0.0.1:5173/",
+            "http://127.0.0.1:5174/",
+            "http://127.0.0.1:5175/"
+            ).permitAll()
         .anyRequest().authenticated()
         .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
         .and().sessionManagement()

@@ -12,7 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reports")
-//@CrossOrigin(origins = "aca va la url local")
+@CrossOrigin("https://live-to.sytes.net/")
+
 public class ReportController {
     @Autowired
     private IReportService reportService;
