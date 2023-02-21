@@ -52,8 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
 
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf().disable()
-        .authorizeRequests().antMatchers("/**"/*"/auth/**",
+    httpSecurity.cors().and().csrf().disable()
+        .authorizeRequests().antMatchers("/**","/auth/**"/*
             "/api/**",
             "/v2/api-docs",
             "http://127.0.0.1:5171/",
@@ -77,6 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     config.addAllowedOrigin("*");
     config.addAllowedHeader("*");
     config.addAllowedMethod("*");
+    
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter((CorsConfigurationSource) source);
   }
