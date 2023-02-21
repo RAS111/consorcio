@@ -49,14 +49,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.csrf().disable()
-        .authorizeRequests().antMatchers("/auth/**",
+        .authorizeRequests().antMatchers("/**"/*"/auth/**",
             "/api/**",
             "/v2/api-docs",
             "http://127.0.0.1:5171/",
             "http://127.0.0.1:5172/",
             "http://127.0.0.1:5173/",
             "http://127.0.0.1:5174/",
-            "http://127.0.0.1:5175/"
+            "http://127.0.0.1:5175/"*/
             ).permitAll()
         .anyRequest().authenticated()
         .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
