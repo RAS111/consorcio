@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transactions")
-@CrossOrigin
+@CrossOrigin("https://live-to.sytes.net")
 public class TransactionController {
 
   @Autowired
