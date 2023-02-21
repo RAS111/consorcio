@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/reservations")
-@CrossOrigin("https://live-to.sytes.net/")
+@CrossOrigin("https://consorcio-production.up.railway.app")
 
 public class AmenitiesController {
   @Autowired
