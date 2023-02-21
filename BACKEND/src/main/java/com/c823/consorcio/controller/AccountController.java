@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/accounts")
-@CrossOrigin("https://consorcio-production.up.railway.app")
+@CrossOrigin
 public class AccountController {
 
   @Autowired
