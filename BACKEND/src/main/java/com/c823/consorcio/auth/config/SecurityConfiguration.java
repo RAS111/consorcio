@@ -26,8 +26,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
@@ -81,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-  }*/
+  }
   /*@Bean
   public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -93,7 +93,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter((CorsConfigurationSource) source);
-  }
+  }*/
   @Bean
   public WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurer() {
@@ -105,7 +105,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .maxAge(3600);
       }
     };
-  }*/
+  }
+
 
 }
 

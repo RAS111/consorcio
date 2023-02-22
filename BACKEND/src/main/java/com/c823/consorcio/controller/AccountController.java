@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/accounts")
-@CrossOrigin("https://live-to.sytes.net")
+@CrossOrigin//("https://live-to.sytes.net")
 public class AccountController {
 
   @Autowired
