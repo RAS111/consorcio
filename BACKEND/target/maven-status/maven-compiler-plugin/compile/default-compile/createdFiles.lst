@@ -12,6 +12,7 @@ com\c823\consorcio\entity\UserEntity.class
 com\c823\consorcio\controller\AmenitiesController.class
 com\c823\consorcio\repository\IReservationRepository.class
 com\c823\consorcio\entity\RoleEntity.class
+com\c823\consorcio\auth\config\SecurityConfiguration$1.class
 com\c823\consorcio\entity\AccountEntity.class
 com\c823\consorcio\auth\UserAuthController.class
 com\c823\consorcio\mapper\UserMap.class
