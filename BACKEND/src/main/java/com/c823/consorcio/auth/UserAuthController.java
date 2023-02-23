@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin("https://live-to.sytes.net")
-
+//@CrossOrigin("https://live-to.sytes.net")
+@CrossOrigin("*")
 
 public class UserAuthController {
 
