@@ -65,8 +65,8 @@ public class StartData {
         this.createAmenitie(1L, Amenities.GYM);
         this.createAmenitie(2L, Amenities.GRILL);
         this.createAmenitie(3L, Amenities.LOUNGE);
-        this.createAmenitie(3L, Amenities.SWPOOL);
-        this.createAmenitie(3L, Amenities.TENNIS);
+        this.createAmenitie(4L, Amenities.SWPOOL);
+        this.createAmenitie(5L, Amenities.TENNIS);
     }
 
     private void createAmenitie(Long l, Amenities name) {

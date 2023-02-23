@@ -25,11 +25,9 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
   @Autowired
   private UserDetailsCustomService userDetailsCustomService;
   @Autowired
@@ -41,7 +39,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsCustomService);
-
   }
 
   @Bean
@@ -58,55 +55,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
 
-
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll();
-  }
-        /*.authorizeRequests().anyRequest().permitAll();
-    httpSecurity.cors().and().csrf().disable()
-        .authorizeRequests().antMatchers("/**","/auth/**"/*
-            "/api/**",
-            "/v2/api-docs",
-            "http://127.0.0.1:5171/",
-            "http://127.0.0.1:5172/",
-            "http://127.0.0.1:5173/",
-            "http://127.0.0.1:5174/",
-            "http://127.0.0.1:5175/"
-            ).permitAll()
-        .antMatchers(HttpMethod.POST,"/**").permitAll()
-        .antMatchers(HttpMethod.GET,"/**").permitAll()
-        .anyRequest().authenticated()
-        .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-        .and().sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    httpSecurity.csrf().disable()
+            .authorizeRequests().antMatchers("/auth/**",
+                    "/api/**",
+                    "/v2/api-docs").permitAll()
+            .anyRequest().authenticated()
+            .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+            .and().sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
   }
-  /*@Bean
-  public CorsFilter corsFilter() {
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration config = new CorsConfiguration();
-    config.setAllowCredentials(true); // you USUALLY want this
-    config.addAllowedOrigin("*");
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("*");
-
-    source.registerCorsConfiguration("/**", config);
-    return new CorsFilter((CorsConfigurationSource) source);
-  }*/
-  @Bean
-  public WebMvcConfigurer corsConfigurer() {
-    return new WebMvcConfigurer() {
-      @Override
-      public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-            .allowedOrigins("*")
-            .allowedMethods("GET", "POST", "PATCH", "PUT","DELETE")
-            .maxAge(3600);
-      }
-    };
-  }
-
 
 }
 
