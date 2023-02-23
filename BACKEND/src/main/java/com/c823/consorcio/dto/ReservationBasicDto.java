@@ -10,6 +10,6 @@ public class ReservationBasicDto {
   private Long reservationId;
   private Amenities name;
   private LocalDate reservationDate;
-  private Turn tunr;
+  private Turn turn;
 
 }

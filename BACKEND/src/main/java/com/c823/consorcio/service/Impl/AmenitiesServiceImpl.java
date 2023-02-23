@@ -34,7 +34,7 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
     ReservationEntity entity = amenitiesMap.amenitieDto2Entity(reservationDto,userId);
     reservations.forEach(reservation -> {
       if(reservations.stream().anyMatch(i -> reservationDto.getReservationDate().equals(i.getReservationDate()) )
-      && reservations.stream().anyMatch(i -> reservationDto.getTur().equals(i.getTurn()))){
+      && reservations.stream().anyMatch(i -> reservationDto.getTurn().equals(i.getTurn()))){
         throw new ParamNotFound("The day and turn already in use");
       }
     });
