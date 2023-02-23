@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/accounts")
+//prueba cors
 @CrossOrigin(origins = "*")
 public class AccountController {
 
