@@ -57,10 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.csrf().disable()
-            .cors().disable()
-            .authorizeRequests().antMatchers("/auth/**",
-                    "/api/**",
-                    "/v2/api-docs").permitAll()
+            .authorizeRequests().antMatchers("/auth/**").permitAll()
             .anyRequest().authenticated()
             .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
             .and().sessionManagement()
@@ -69,6 +66,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PATCH", "PUT","DELETE")
+                .maxAge(3600);
+      }
+    };
+  }
+
 }
+
+
 
 
