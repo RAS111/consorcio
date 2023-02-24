@@ -25,6 +25,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -56,27 +57,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
 
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf().disable()
-            .authorizeRequests().antMatchers("/auth/**").permitAll()
+    httpSecurity
+            .csrf().disable()
+            .cors().disable()
+            .authorizeRequests()
+            .antMatchers("/auth/**").permitAll()
+            .antMatchers(HttpMethod.OPTIONS).permitAll()
             .anyRequest().authenticated()
             .and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
             .and().sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-  }
-
-  @Bean
-  public WebMvcConfigurer corsConfigurer() {
-    return new WebMvcConfigurer() {
-      @Override
-      public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PATCH", "PUT","DELETE")
-                .maxAge(3600);
-      }
-    };
   }
 
 }
