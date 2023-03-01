@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class ReportBasicDto {
 
+  private Long id;
   private LocalDate creationDate;
   private Issue issue;
   private Status status;

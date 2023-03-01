@@ -49,6 +49,7 @@ public class ReportMap {
 
   private ReportBasicDto reportEntity2BasicDto(ReportEntity entity) {
     ReportBasicDto dto = new ReportBasicDto();
+    dto.setId(entity.getReportId());
     dto.setCreationDate(entity.getCreationDate());
     dto.setIssue(entity.getIssue());
     dto.setStatus(entity.getStatus());
