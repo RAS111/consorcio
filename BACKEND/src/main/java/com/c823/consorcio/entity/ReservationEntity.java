@@ -31,9 +31,9 @@ public class ReservationEntity {//Reserva
     private Turn turn;
 
     //@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "USER_ID")
-    private UserEntity userEntity;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 
     private boolean deleted = Boolean.FALSE;
 

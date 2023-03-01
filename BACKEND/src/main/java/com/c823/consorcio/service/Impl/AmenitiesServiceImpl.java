@@ -3,6 +3,7 @@ package com.c823.consorcio.service.Impl;
 import com.c823.consorcio.auth.exception.ParamNotFound;
 import com.c823.consorcio.dto.ReservationBasicDto;
 import com.c823.consorcio.dto.ReservationDto;
+import com.c823.consorcio.entity.MessageEntity;
 import com.c823.consorcio.entity.ReservationEntity;
 import com.c823.consorcio.entity.UserEntity;
 import com.c823.consorcio.mapper.AmenitiesMap;
@@ -46,8 +47,17 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
 
   @Override
   public List<ReservationBasicDto> getReservations() {
-
     return amenitiesMap.amenitieEntityList2DtoList(iReservationRepository.findAll());
+  }
+
+  @Override
+  public List<ReservationBasicDto> getReservationsByUser() {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    UserEntity user = userRepository.findByEmail(email);
+    Long userId = user.getUserId();
+    List<ReservationEntity> reservationEntityList = iReservationRepository.findAllByUser(user);
+    List<ReservationBasicDto> reservationList = amenitiesMap.amenitieEntityList2DtoList(reservationEntityList);
+    return reservationList;
   }
 
   @Override
@@ -56,7 +66,7 @@ public class AmenitiesServiceImpl implements IAmenitiesService {
         ()-> new ParamNotFound("ID do not exist"));
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     UserEntity user = userRepository.findByEmail(email);
-    if(!Objects.equals(user.getUserId(),reservation.getUserEntity().getUserId())){
+    if(!Objects.equals(user.getUserId(),reservation.getUser().getUserId())){
       throw new ParamNotFound("the Reservation id don't below to user");
     }
     ReservationDto result = amenitiesMap.amenitieEntity2Dto(reservation);

@@ -36,6 +36,12 @@ public class AmenitiesController {
     return ResponseEntity.ok().body(list);
   }
 
+  @GetMapping("")
+  public ResponseEntity<List<ReservationBasicDto>> listReservationsByUser(){
+    List<ReservationBasicDto> list = this.amenitiesService.getReservationsByUser();
+    return ResponseEntity.ok().body(list);
+  }
+
   @GetMapping("/{reservationId}")
   public ResponseEntity<ReservationDto> getDetailsReservation(@PathVariable Long reservationId){
     ReservationDto reservation = this.amenitiesService.getDetailsById(reservationId);

@@ -11,5 +11,7 @@ public class ReservationBasicDto {
   private Amenities name;
   private LocalDate reservationDate;
   private Turn turn;
+  private String userName;
+  private Long userId;
 
 }

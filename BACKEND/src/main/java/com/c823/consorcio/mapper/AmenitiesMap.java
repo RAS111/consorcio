@@ -21,7 +21,7 @@ public class AmenitiesMap {
     entity.setName(reservationDto.getName());
     entity.setTurn(reservationDto.getTurn());
     entity.setReservationDate(reservationDto.getReservationDate());
-    entity.setUserEntity(iUserRepository.findByUserId(userId));
+    entity.setUser(iUserRepository.findByUserId(userId));
     return entity;
   }
 
@@ -32,7 +32,7 @@ public class AmenitiesMap {
     dto.setTurn(entitySaved.getTurn());
     dto.setReservationDate(entitySaved.getReservationDate());
     //Long id = entitySaved.getUserEntity().getUserId();
-    dto.setUserId(entitySaved.getUserEntity().getUserId());
+    dto.setUserId(entitySaved.getUser().getUserId());
     return dto;
 
   }
@@ -57,6 +57,8 @@ public class AmenitiesMap {
     dto.setName(entitySaved.getName());
     dto.setTurn(entitySaved.getTurn());
     dto.setReservationDate(entitySaved.getReservationDate());
+    dto.setUserName(entitySaved.getUser().getFirstName());
+    dto.setUserId(entitySaved.getUser().getUserId());
     return dto;
   }
 }
