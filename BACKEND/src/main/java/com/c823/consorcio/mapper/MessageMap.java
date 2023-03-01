@@ -19,6 +19,7 @@ public class MessageMap {
     MessageEntity entity = new MessageEntity();
     entity.setDetail(messageDto.getDetail());
     entity.setSubject(messageDto.getSubject());
+    entity.setMessage(messageDto.getMessage());
     entity.setUser(userRepository.findByUserId(messageDto.getUserId()));
     entity.setCreationDate(messageDto.getCreationDate());
     return entity;
@@ -28,6 +29,7 @@ public class MessageMap {
     MessageDto dto = new MessageDto();
     dto.setId(entitySaved.getId());
     dto.setSubject(entitySaved.getSubject());
+    dto.setMessage(entitySaved.getMessage());
     dto.setDetail(entitySaved.getDetail());
     dto.setUserId(entitySaved.getUser().getUserId());
     dto.setCreationDate(entitySaved.getCreationDate());
@@ -36,23 +38,27 @@ public class MessageMap {
 
   public List<MessageBasicDto> messageEntityList2BasicDtoList(List<MessageEntity> entities) {
     List<MessageBasicDto> messages = new ArrayList<>();
-    for (MessageEntity entiy : entities){
-      messages.add(messagesEntity2BasicDto(entiy));
+    for (MessageEntity entity : entities){
+      messages.add(messagesEntity2BasicDto(entity));
     }
     return messages;
   }
 
-  private MessageBasicDto messagesEntity2BasicDto(MessageEntity entiy) {
+  private MessageBasicDto messagesEntity2BasicDto(MessageEntity entity) {
     MessageBasicDto dto = new MessageBasicDto();
-    dto.setCreationDate(entiy.getCreationDate());
-    dto.setSubject(entiy.getSubject());
+    dto.setCreationDate(entity.getCreationDate());
+    dto.setMessage(entity.getMessage());
+    dto.setUserId(entity.getUser().getUserId());
+    dto.setUserName(entity.getUser().getFirstName() + " " + entity.getUser().getLastName());
+
+    dto.setSubject(entity.getSubject());
     return dto;
   }
 
   public List<MessageDto> messageEntityList2DtoList(List<MessageEntity> entities) {
     List<MessageDto> messages = new ArrayList<>();
-    for (MessageEntity entiy : entities){
-      messages.add(messageEntity2Dto(entiy));
+    for (MessageEntity entity : entities){
+      messages.add(messageEntity2Dto(entity));
     }
     return messages;
   }

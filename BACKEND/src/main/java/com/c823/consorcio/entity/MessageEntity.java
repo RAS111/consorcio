@@ -19,6 +19,7 @@ public class MessageEntity {
     private Long id;
     private String subject;
     private String detail;
+    private String message;
 
     @CreationTimestamp
     @Column (name= "CREATION_DATE")

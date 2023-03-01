@@ -53,7 +53,7 @@ public class MessageServiceImpl implements MessageService {
   @Override
   public List<MessageDto> getDetailsById(Long userId) {
     UserEntity user = userRepository.findById(userId).orElseThrow(
-        ()-> new ParamNotFound("Invalid ID"));
+            ()-> new ParamNotFound("Invalid ID"));
     List<MessageEntity> messageEntityList = messageRepository.findAllByUser(user);
     List<MessageDto> messageList = messageMap.messageEntityList2DtoList(messageEntityList);
 
@@ -63,7 +63,7 @@ public class MessageServiceImpl implements MessageService {
   @Override
   public MessageDto getdetails(Long message_id) {
     MessageEntity messageEntity = messageRepository.findById(message_id).orElseThrow(
-        ()->new ParamNotFound("Invalid ID"));
+            ()->new ParamNotFound("Invalid ID"));
     MessageDto messageDto = messageMap.messageEntity2Dto(messageEntity);
     return messageDto;
   }
