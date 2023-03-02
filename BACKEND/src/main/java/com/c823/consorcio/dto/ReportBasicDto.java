@@ -13,5 +13,6 @@ public class ReportBasicDto {
   private Issue issue;
   private Status status;
   private Long userId;
+  private String userName;
 
 }

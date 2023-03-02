@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReportServiceImpl implements IReportService {
@@ -45,5 +43,15 @@ public class ReportServiceImpl implements IReportService {
 
     return reportMap.reportEntityList2DtoBasicList(reportRepository.findAll());
   }
+
+  @Override
+  public List<ReportBasicDto> getReportsByUser() {
+      String email = SecurityContextHolder.getContext().getAuthentication().getName();
+      UserEntity user = userRepository.findByEmail(email);
+      List<ReportEntity> reportEntityList = reportRepository.findAllByUser(user);
+      List<ReportBasicDto> reportList = reportMap.reportEntityList2DtoBasicList(reportEntityList);
+      return reportList;
+  }
+
 
 }

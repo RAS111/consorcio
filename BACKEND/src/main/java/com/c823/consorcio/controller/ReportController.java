@@ -1,6 +1,7 @@
 package com.c823.consorcio.controller;
 
 import com.c823.consorcio.dto.ReportBasicDto;
+import com.c823.consorcio.dto.ReservationBasicDto;
 import com.c823.consorcio.service.IReportService;
 import com.c823.consorcio.dto.ReportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class ReportController {
     public ResponseEntity<List<ReportBasicDto>> getReports(){
         List<ReportBasicDto> listReports = this.reportService.getListReports();
         return ResponseEntity.ok().body(listReports);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<ReportBasicDto>> listReservationsByUser(){
+        List<ReportBasicDto> list = this.reportService.getReportsByUser();
+        return ResponseEntity.ok().body(list);
     }
 
     // TODO : Resta lista de repotes de todos los usuarios (GET/REPORTS) (ADMIN)

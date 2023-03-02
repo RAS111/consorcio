@@ -19,5 +19,6 @@ public class ReportDTO {
     private String detail;
     private String place;
     private Long userId;
+    private String userName;
 
 }
